@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { SortOrder } from "~/utils/helpers";
+import { type SortOrder } from "~/utils/helpers";
 
 type APITitle = {
   "Title Number": string;
@@ -67,8 +67,6 @@ export const titleRouter = createTRPCRouter({
       const res = await fetch(testDataUrl);
       const data = await res.json() as APITitle[];
       const title = data.find((t) => t["Title Number"] === input.titleNumber);
-
-      console.log(data.length, title, input.titleNumber);
 
       if (!title) {
         throw new Error("Title not found");

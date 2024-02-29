@@ -21,8 +21,6 @@ const getPageUrl = (page: number, sortBy: keyof Title, sortOrder: SortOrder) => 
 export default function Titles() {
   const router = useRouter();
 
-  console.log('router.query.page', router.query.page);
-
   const currentPage = router.query.page ? parseInt(router.query.page as string) : 1;
   const defaultSortBy = "titleNumber";
   const currentSortBy = router.query.sortBy ? router.query.sortBy as "titleNumber" | "tenure" : defaultSortBy;

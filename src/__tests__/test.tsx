@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { TableLayout, TableColumn } from '../components/Table'
+import { TableLayout, type TableColumn } from '../components/Table'
 
 type Person = {
   name: string;
@@ -31,7 +31,17 @@ describe('Table', () => {
       },
     ];
 
-    render(<TableLayout columns={columns} rows={data} onSort={() => {}} />)
+    render(
+      <TableLayout
+        columns={columns}
+        rows={data}
+        onSort={() => { console.log("sorting") }}
+        currentSortBy={"name"}
+        defaultSortBy={"name"}
+        currentSortOrder={"asc"}
+        defaultSortOrder={"asc"}
+      />
+    )
   });
 
   it('renders column names correctly', () => {

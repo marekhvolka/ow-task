@@ -1,4 +1,4 @@
-import { Dialog, Menu } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import {
   Bars3Icon,
 } from "@heroicons/react/24/solid";
