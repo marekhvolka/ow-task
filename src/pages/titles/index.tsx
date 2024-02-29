@@ -33,7 +33,7 @@ export default function Titles() {
       sortable: true,
       sortActive: currentSortBy === "titleNumber",
       sortOrder: currentSortOrder,
-      width: "70%",
+      width: "55%",
     },
     {
       title: "Class of Title",
@@ -41,7 +41,7 @@ export default function Titles() {
       sortable: true,
       sortActive: currentSortBy === "tenure",
       sortOrder: currentSortOrder,
-      width: "30%",
+      width: "45%",
     },
   ];
 

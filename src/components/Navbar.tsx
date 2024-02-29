@@ -79,7 +79,7 @@ export const NavBar: React.FC = () => {
   return (
     <>
       {/* Desktop */}
-      <div className="hidden h-16 justify-between bg-white md:flex">
+      <div className="hidden h-16 justify-between border-b border-b-mainColor bg-white md:flex">
         <div className="flex flex-1 gap-8">
           <div className="flex items-center">
             <Link href="/" className="relative">
@@ -101,23 +101,11 @@ export const NavBar: React.FC = () => {
       </div>
 
       {/* Mobile */}
-      <div className="flex h-14 items-center justify-between border-b-2 border-b-[#D7D7D7] bg-white px-4 md:hidden">
+      <div className="flex h-14 items-center justify-between border-b border-b-mainColor bg-white px-4 md:hidden">
         <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Orbital Witness</span>
           <img className="h-[40px] fill-[#001346]" src="/logo.svg" alt="Orbital Witness" />
         </Link>
-
-        {menuItems
-          .filter((item) => item.href === router.pathname)
-          .map((item) => (
-            <MobileNavBarLink
-              key={item.href}
-              href={item.href}
-              active
-            >
-              {item.name}
-            </MobileNavBarLink>
-          ))}
 
         <button
           type="button"
@@ -136,7 +124,7 @@ export const NavBar: React.FC = () => {
       >
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white">
-          <div className="flex h-14 items-center justify-between border-b-2 border-b-[#D7D7D7] bg-white px-4 md:hidden">
+          <div className="flex h-14 items-center justify-between border-b border-b-mainColor bg-white px-4 md:hidden">
             <Link href="/planner" className="-m-1.5 p-1.5">
               <span className="sr-only">Orbital Witness</span>
               <img className="h-[40px] fill-[#001346]" src="/logo.svg" />
