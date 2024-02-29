@@ -1,5 +1,5 @@
 import React from "react";
-import { SortOrder, cn } from "~/utils/helpers";
+import { type SortOrder, cn } from "~/utils/helpers";
 import { LoadingSpinner } from "./LoadingSpinner";
 
 export type TableColumn<T> = {
@@ -69,6 +69,7 @@ export function TableLayout<T>(props: Props<T>) {
                 "bg-white border-b hover:bg-gray-50 cursor-pointer",
               )}
               onClick={() => props.onRowClick?.(row)}
+              data-testid={`table-row-${index}`}
             >
               {props.columns.map((column, index) => (
                 <td
