@@ -60,39 +60,37 @@ export default function Titles() {
 
   return (
     <MainLayout>
-      <main className="">
-        <div>
-          {data ? (
-            <div>
-              <TableLayout
-                columns={columns}
-                rows={data}
-                onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
-                onSort={onSort}
-              />
-              <div className="flex justify-between items-center mt-3">
-                <FullButton
-                  variant="primary"
-                  disabled={currentPage === 1}
-                  onClick={() => changePage(currentPage - 1)}
-                >Previous page
-                </FullButton>
-                <span>Page {currentPage}</span>
-                <FullButton
-                  variant="primary"
-                  onClick={() => changePage(currentPage + 1)}
-                >
-                  Next page
-                </FullButton>
-              </div>
+      <div>
+        {data ? (
+          <div>
+            <TableLayout
+              columns={columns}
+              rows={data}
+              onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
+              onSort={onSort}
+            />
+            <div className="flex justify-between items-center mt-3">
+              <FullButton
+                variant="primary"
+                disabled={currentPage === 1}
+                onClick={() => changePage(currentPage - 1)}
+              >Previous page
+              </FullButton>
+              <span>Page {currentPage}</span>
+              <FullButton
+                variant="primary"
+                onClick={() => changePage(currentPage + 1)}
+              >
+                Next page
+              </FullButton>
             </div>
-            ) : (
-              <div>
-                <h1 className="text-4xl font-bold ">Loading...</h1>
-              </div>
-          )}
-        </div>
-      </main>
+          </div>
+          ) : (
+            <div>
+              <h1 className="text-4xl font-bold ">Loading...</h1>
+            </div>
+        )}
+      </div>
     </MainLayout>
   );
 }

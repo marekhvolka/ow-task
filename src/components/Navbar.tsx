@@ -51,9 +51,9 @@ function MobileNavBarLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center rounded-full px-6 py-1 text-sm hover:bg-[#F6F6F6] active:bg-[#EEEEEE]",
+        "relative inline-flex items-center rounded-full px-6 py-1 text-sm hover:rgba(26,27,31,.75) active:bg-[#EEEEEE]",
         className,
-        active ? "font-semibold text-[#001346]" : "font-normal text-[#999]"
+        active ? "font-semibold text-[#001346]" : "font-normal text-mainColor "
       )}
     >
       {children}
@@ -104,7 +104,7 @@ export const NavBar: React.FC = () => {
       <div className="flex h-14 items-center justify-between border-b-2 border-b-[#D7D7D7] bg-white px-4 md:hidden">
         <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Orbital Witness</span>
-          <img className="h-7 w-7 fill-[#001346]" src="/logo.svg" alt="Orbital Witness" />
+          <img className="h-[40px] fill-[#001346]" src="/logo.svg" alt="Orbital Witness" />
         </Link>
 
         {menuItems
@@ -139,7 +139,7 @@ export const NavBar: React.FC = () => {
           <div className="flex h-14 items-center justify-between border-b-2 border-b-[#D7D7D7] bg-white px-4 md:hidden">
             <Link href="/planner" className="-m-1.5 p-1.5">
               <span className="sr-only">Orbital Witness</span>
-              <img className="h-7 w-7 fill-[#001346]" src="/logo.svg" />
+              <img className="h-[40px] fill-[#001346]" src="/logo.svg" />
             </Link>
             <button
               type="button"
@@ -164,14 +164,6 @@ export const NavBar: React.FC = () => {
                 {item.name}
               </MobileNavBarLink>
             ))}
-            <MobileNavBarLink
-              href="/feedback"
-              className="font-normal"
-              active={router.pathname === "/feedback"}
-            >
-              Send us feedback
-            </MobileNavBarLink>
-            
           </div>
         </Dialog.Panel>
       </Dialog>
