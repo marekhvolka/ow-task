@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import MainLayout from "~/components/MainLayout";
+import MapWrapper from "~/components/MapWrapper";
 
 import { api } from "~/utils/api";
 import { cn } from "~/utils/helpers";
@@ -8,13 +9,15 @@ export default function TitleDetail() {
   const router = useRouter();
   const titleNumber = router.query.titleNumber as string | undefined;
 
-  const { data } = api.title.get.useQuery({ titleNumber: titleNumber ?? "" });
+  const { data } = api.title.get.useQuery({ titleNumber: titleNumber ?? "" }, {
+    enabled: !!titleNumber,
+  });
 
   return (
     <MainLayout>
       <div>
         {data ? (
-          <div className="flex flex-col md:flex-row">
+          <div className="flex gap-10 flex-col md:flex-row">
             <div className="flex-1">
               <div className="flex mb-2 items-center gap-5">
                 <h1 className="text-2xl font-bold">
@@ -46,7 +49,10 @@ export default function TitleDetail() {
               </p>
             </div>
             <div className="flex-1">
-              Map
+              <MapWrapper
+                lng={data.x}
+                lat={data.y}
+              />
             </div>
           </div>
           ) : (
