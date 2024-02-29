@@ -1,8 +1,7 @@
-// import { Dialog, Menu } from "@headlessui/react";
-// import {
-//   Bars3Icon,
-// } from "@heroicons/react/24/solid";
-import Image from "next/image";
+import { Dialog, Menu } from "@headlessui/react";
+import {
+  Bars3Icon,
+} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -126,10 +125,10 @@ export const NavBar: React.FC = () => {
           onClick={() => setMobileMenuOpen(true)}
         >
           <span className="sr-only">Open main menu</span>
-          {/* <Bars3Icon className="h-6 w-6 fill-[#999999]" aria-hidden="true" /> */}
+          <Bars3Icon className="h-6 w-6 fill-[#999999]" aria-hidden="true" />
         </button>
       </div>
-      {/* <Dialog
+      <Dialog
         as="div"
         className="lg:hidden"
         open={mobileMenuOpen}
@@ -140,7 +139,7 @@ export const NavBar: React.FC = () => {
           <div className="flex h-14 items-center justify-between border-b-2 border-b-[#D7D7D7] bg-white px-4 md:hidden">
             <Link href="/planner" className="-m-1.5 p-1.5">
               <span className="sr-only">Orbital Witness</span>
-              <Logo className="h-7 w-7 fill-[#001346]" />
+              <img className="h-7 w-7 fill-[#001346]" src="/logo.svg" />
             </Link>
             <button
               type="button"
@@ -175,7 +174,7 @@ export const NavBar: React.FC = () => {
             
           </div>
         </Dialog.Panel>
-      </Dialog> */}
+      </Dialog>
     </>
   );
 };

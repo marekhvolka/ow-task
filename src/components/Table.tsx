@@ -1,16 +1,21 @@
 import React from "react";
-import { cn } from "~/utils/helpers";
+import { SortOrder, cn } from "~/utils/helpers";
 
 export type TableColumn<T> = {
   title: string;
-  key?: keyof T;
+  key: keyof T;
   render?: (row: T) => React.ReactNode;
+  sortable?: boolean;
+  sortActive?: boolean;
+  sortOrder?: SortOrder;
+  width?: string;
 }
 
 interface Props<T> {
   rows: T[] | undefined;
   columns: TableColumn<T>[];
   onRowClick?: (row: T) => void;
+  onSort: (column: TableColumn<T>) => void;
 }
 
 export function TableLayout<T>(props: Props<T>) {
@@ -20,8 +25,35 @@ export function TableLayout<T>(props: Props<T>) {
       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           {props.columns.map((column, index) => (
-            <th key={index} className="text-left px-6 py-3">
-              {column.title}
+            <th
+              key={index}
+              className={cn(
+                "text-left px-6 py-3",
+              )}
+              onClick={() => {
+                if (column.sortable) {
+                  props.onSort(column);
+                }
+              }}
+              style={{
+                width: column.width,
+              }}
+            >
+              <div className={cn(
+                "flex items-center",
+                column.sortable ? "cursor-pointer" : "",
+              )}>
+                {column.title}
+                {column.sortable && column.sortActive && (
+                  <img
+                    src={column.sortOrder === "asc" ? "/sort-asc.svg" : "/sort-desc.svg"}
+                    alt="sort"
+                    className={cn(
+                      "w-[20px] h-[20px] ml-5",
+                    )}
+                  />
+                )}
+              </div>
             </th>
           ))}
         </tr>
