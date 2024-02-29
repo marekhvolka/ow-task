@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { LoadingSpinner } from "~/components/LoadingSpinner";
 import MainLayout from "~/components/MainLayout";
 import MapWrapper from "~/components/MapWrapper";
@@ -16,6 +17,12 @@ export default function TitleDetail() {
 
   return (
     <MainLayout>
+      <Breadcrumbs
+        paths={[
+          { label: "Home", href: "/" },
+          { label: "Titles", href: "/titles" },
+        ]}
+      />
       <div>
         {data ? (
           <div className="flex gap-10 flex-col md:flex-row">

@@ -23,7 +23,7 @@ function NavBarLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center px-[18px] py-[6px] text-[18px] text-mainColor",
+        "relative inline-flex items-center px-[18px] py-[6px] text-[18px] text-textColor",
         className,
         active
           ? "bg-bittersweet-tint1 text-bittersweet hover:bg-bittersweet-tint1 active:bg-bittersweet-tint1"
@@ -53,7 +53,7 @@ function MobileNavBarLink({
       className={cn(
         "relative inline-flex items-center px-6 py-1 text-sm",
         className,
-        active ? "font-semibold text-[#001346]" : "font-normal text-mainColor "
+        active ? "font-semibold text-[#001346]" : "font-normal text-textColor "
       )}
     >
       {children}
@@ -124,7 +124,7 @@ export const NavBar: React.FC = () => {
       >
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white">
-          <div className="flex h-14 items-center justify-between border-b border-b-mainColor bg-white px-4 md:hidden">
+          <div className="flex h-14 items-center justify-between border-b border-b-textColor bg-white px-4 md:hidden">
             <Link href="/planner" className="-m-1.5 p-1.5">
               <span className="sr-only">Orbital Witness</span>
               <img className="h-[40px] fill-[#001346]" src="/logo.svg" />

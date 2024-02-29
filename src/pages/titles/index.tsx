@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { FullButton } from "~/components/Button";
 import MainLayout from "~/components/MainLayout";
 import { type TableColumn, TableLayout } from "~/components/Table";
@@ -60,29 +61,27 @@ export default function Titles() {
 
   return (
     <MainLayout>
-      <div>
-        <TableLayout
-          columns={columns}
-          rows={data}
-          onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
-          onSort={onSort}
-          loading={isLoading}
-        />
-        <div className="flex justify-between items-center mt-3">
-          <FullButton
-            variant="primary"
-            disabled={currentPage === 1}
-            onClick={() => changePage(currentPage - 1)}
-          >Previous page
-          </FullButton>
-          <span>Page {currentPage}</span>
-          <FullButton
-            variant="primary"
-            onClick={() => changePage(currentPage + 1)}
-          >
-            Next page
-          </FullButton>
-        </div>
+      <TableLayout
+        columns={columns}
+        rows={data}
+        onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
+        onSort={onSort}
+        loading={isLoading}
+      />
+      <div className="flex justify-between items-center mt-3">
+        <FullButton
+          variant="primary"
+          disabled={currentPage === 1}
+          onClick={() => changePage(currentPage - 1)}
+        >Previous page
+        </FullButton>
+        <span>Page {currentPage}</span>
+        <FullButton
+          variant="primary"
+          onClick={() => changePage(currentPage + 1)}
+        >
+          Next page
+        </FullButton>
       </div>
     </MainLayout>
   );

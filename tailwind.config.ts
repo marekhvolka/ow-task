@@ -6,13 +6,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-      },
-      fontFamily: {
         sans: ["var(--font-outfit)", ...fontFamily.sans],
       },
       colors: {
-        mainColor: "#006a87",
+        textColor: "#006a87",
+        tertiaryColor: "#ff6e30",
       }
     },
   },
