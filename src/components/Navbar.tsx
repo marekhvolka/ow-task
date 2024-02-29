@@ -23,7 +23,7 @@ function NavBarLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center rounded-full px-[18px] py-[6px] text-[18px] text-mainColor hover:rgba(26,27,31,.75) active:bg-[#EEEEEE]",
+        "relative inline-flex items-center px-[18px] py-[6px] text-[18px] text-mainColor",
         className,
         active
           ? "bg-bittersweet-tint1 text-bittersweet hover:bg-bittersweet-tint1 active:bg-bittersweet-tint1"
@@ -51,7 +51,7 @@ function MobileNavBarLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center rounded-full px-6 py-1 text-sm hover:rgba(26,27,31,.75) active:bg-[#EEEEEE]",
+        "relative inline-flex items-center px-6 py-1 text-sm",
         className,
         active ? "font-semibold text-[#001346]" : "font-normal text-mainColor "
       )}
@@ -79,7 +79,7 @@ export const NavBar: React.FC = () => {
   return (
     <>
       {/* Desktop */}
-      <div className="hidden h-16 justify-between border-b border-b-mainColor bg-white md:flex">
+      <div className="hidden h-16 justify-between bg-white md:flex">
         <div className="flex flex-1 gap-8">
           <div className="flex items-center">
             <Link href="/" className="relative">
@@ -101,7 +101,7 @@ export const NavBar: React.FC = () => {
       </div>
 
       {/* Mobile */}
-      <div className="flex h-14 items-center justify-between border-b border-b-mainColor bg-white px-4 md:hidden">
+      <div className="flex h-14 items-center justify-between bg-white md:hidden">
         <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Orbital Witness</span>
           <img className="h-[40px] fill-[#001346]" src="/logo.svg" alt="Orbital Witness" />

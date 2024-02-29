@@ -7,11 +7,13 @@ interface Props {
 export default function MainLayout(props: Props) {
 
   return (
-    <div className="h-[100svh] w-full md:w-[1000px] mx-auto">
-      <header className="mb-5">
-        <NavBar />
+    <div className="h-[100svh]">
+      <header className=" mb-5 border-b border-b-mainColor  ">
+        <div className="px-4 w-full md:w-[1000px] mx-auto">
+          <NavBar />
+        </div>
       </header>
-      <main className="px-4 md:px-0">
+      <main className="px-4 w-full md:w-[1000px] mx-auto">
         {props.children}
       </main>
     </div>

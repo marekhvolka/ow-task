@@ -36,7 +36,7 @@ export default function TitleDetail() {
                 </span>
               </div>
               
-              <p>
+              <p className="mb-5">
                 Quodsi haberent magnalia inter
                 potentiam et divitias, et non illam
                 quidem haec eo spectant haec quoque
