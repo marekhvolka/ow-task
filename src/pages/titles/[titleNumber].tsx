@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { LoadingSpinner } from "~/components/LoadingSpinner";
 import MainLayout from "~/components/MainLayout";
 import MapWrapper from "~/components/MapWrapper";
 
@@ -56,8 +57,8 @@ export default function TitleDetail() {
             </div>
           </div>
           ) : (
-            <div>
-              <h1 className="text-4xl font-bold ">Loading...</h1>
+            <div className="flex justify-center items-center my-20">
+              <LoadingSpinner />
             </div>
         )}
       </div>

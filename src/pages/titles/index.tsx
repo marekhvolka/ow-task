@@ -24,7 +24,7 @@ export default function Titles() {
   const currentSortBy = router.query.sortBy ? router.query.sortBy as "titleNumber" | "tenure" : "titleNumber";
   const currentSortOrder = router.query.sortOrder ? router.query.sortOrder as SortOrder : "asc";
 
-  const { data } = api.title.getAll.useQuery({ page: currentPage, pageSize: PAGE_SIZE, sort: { by: currentSortBy, order: currentSortOrder } });
+  const { data, isLoading } = api.title.getAll.useQuery({ page: currentPage, pageSize: PAGE_SIZE, sort: { by: currentSortBy, order: currentSortOrder } });
 
   const columns: TableColumn<Title>[] = [
     {
@@ -61,35 +61,28 @@ export default function Titles() {
   return (
     <MainLayout>
       <div>
-        {data ? (
-          <div>
-            <TableLayout
-              columns={columns}
-              rows={data}
-              onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
-              onSort={onSort}
-            />
-            <div className="flex justify-between items-center mt-3">
-              <FullButton
-                variant="primary"
-                disabled={currentPage === 1}
-                onClick={() => changePage(currentPage - 1)}
-              >Previous page
-              </FullButton>
-              <span>Page {currentPage}</span>
-              <FullButton
-                variant="primary"
-                onClick={() => changePage(currentPage + 1)}
-              >
-                Next page
-              </FullButton>
-            </div>
-          </div>
-          ) : (
-            <div>
-              <h1 className="text-4xl font-bold ">Loading...</h1>
-            </div>
-        )}
+        <TableLayout
+          columns={columns}
+          rows={data}
+          onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
+          onSort={onSort}
+          loading={isLoading}
+        />
+        <div className="flex justify-between items-center mt-3">
+          <FullButton
+            variant="primary"
+            disabled={currentPage === 1}
+            onClick={() => changePage(currentPage - 1)}
+          >Previous page
+          </FullButton>
+          <span>Page {currentPage}</span>
+          <FullButton
+            variant="primary"
+            onClick={() => changePage(currentPage + 1)}
+          >
+            Next page
+          </FullButton>
+        </div>
       </div>
     </MainLayout>
   );
