@@ -2,6 +2,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon
+} from "@heroicons/react/24/solid";
 import { FullButton } from "~/components/Button";
 import MainLayout from "~/components/MainLayout";
 import { type TableColumn, TableLayout } from "~/components/Table";
@@ -73,14 +77,17 @@ export default function Titles() {
           variant="primary"
           disabled={currentPage === 1}
           onClick={() => changePage(currentPage - 1)}
-        >Previous page
+          className="pl-[4px]"
+        ><ChevronLeftIcon className="h-6 w-6 mr-1 fill-white" aria-hidden="true" />Previous page
         </FullButton>
         <span>Page {currentPage}</span>
         <FullButton
           variant="primary"
           onClick={() => changePage(currentPage + 1)}
+          className="pr-[4px]"
         >
           Next page
+          <ChevronRightIcon className="h-6 w-6 ml-1 fill-white" aria-hidden="true" />
         </FullButton>
       </div>
     </MainLayout>

@@ -7,6 +7,7 @@ interface Props {
   variant: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "link";
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
+  className?: string;
 }
 
 export const FullButton = (props: Props) => {
@@ -23,6 +24,7 @@ export const FullButton = (props: Props) => {
         props.variant === "danger" ? "bg-[#dc3545] hover:bg-[#c82333] active:bg-[#c82333] text-white" : "",
         props.variant === "warning" ? "bg-[#F7A54A] text-white" : "",
         props.disabled ? "opacity-50 cursor-not-allowed" : "",
+        props.className,
       )}
     >{props.children}
     </button>
