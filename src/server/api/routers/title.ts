@@ -16,7 +16,6 @@ export type Title = {
   tenure: string;
   x: number;
   y: string;
-  
 };
 
 const normalizeTitle = (title: APITitle): Title => {
@@ -33,10 +32,18 @@ const testDataUrl = "https://owfetechtask.blob.core.windows.net/titledata/testda
 
 export const titleRouter = createTRPCRouter({
   getAll: publicProcedure
-    .query(async () => {
+    .input(z.object({
+      page: z.number(),
+      pageSize: z.number(),
+    }))
+    .query(async ({ input }) => {
       const res = await fetch(testDataUrl);
       const data = await res.json() as APITitle[];
-      return data.map((title) => normalizeTitle(title));
+
+      const start = input.pageSize * (input.page - 1);
+      const end = start + input.pageSize;
+
+      return data.slice(start, end).map((title) => normalizeTitle(title));
     }),
 
   get: publicProcedure
