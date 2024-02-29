@@ -7,8 +7,6 @@ export type TableColumn<T> = {
   key: keyof T;
   render?: (row: T) => React.ReactNode;
   sortable?: boolean;
-  sortActive?: boolean;
-  sortOrder?: SortOrder;
   width?: string;
 }
 
@@ -16,11 +14,27 @@ interface Props<T> {
   rows: T[] | undefined;
   columns: TableColumn<T>[];
   onRowClick?: (row: T) => void;
-  onSort: (column: TableColumn<T>) => void;
+  onSort: (key: keyof T, sortOrder: SortOrder) => void;
   loading?: boolean;
+  currentSortBy: keyof T;
+  currentSortOrder: SortOrder;
+  defaultSortBy: keyof T;
+  defaultSortOrder: SortOrder;
 }
 
 export function TableLayout<T>(props: Props<T>) {
+
+  const onSort = (column: TableColumn<T>) => {
+    const shouldResetOrder = props.currentSortOrder === "desc" && props.currentSortBy === column.key;
+
+    if (shouldResetOrder) {
+      props.onSort(props.defaultSortBy, props.defaultSortOrder);
+      return;
+    }
+
+    const newSortOrder = props.currentSortBy === column.key ? "desc" : "asc";
+    props.onSort(column.key, newSortOrder);
+  }
 
   return (
     <div className="w-full">
@@ -35,7 +49,7 @@ export function TableLayout<T>(props: Props<T>) {
                 )}
                 onClick={() => {
                   if (column.sortable) {
-                    props.onSort(column);
+                    onSort(column);
                   }
                 }}
                 style={{
@@ -47,9 +61,9 @@ export function TableLayout<T>(props: Props<T>) {
                   column.sortable ? "cursor-pointer" : "",
                 )}>
                   {column.title}
-                  {column.sortable && column.sortActive && (
+                  {column.sortable && props.currentSortBy === column.key && (
                     <img
-                      src={column.sortOrder === "asc" ? "/sort-asc.svg" : "/sort-desc.svg"}
+                      src={props.currentSortOrder === "asc" ? "/sort-asc.svg" : "/sort-desc.svg"}
                       alt="sort"
                       className={cn(
                         "w-[20px] h-[20px] ml-5",

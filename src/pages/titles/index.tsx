@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { Breadcrumbs } from "~/components/Breadcrumbs";
 import {
   ChevronLeftIcon,
   ChevronRightIcon
@@ -12,7 +10,7 @@ import { type TableColumn, TableLayout } from "~/components/Table";
 import { type Title } from "~/server/api/routers/title";
 
 import { api } from "~/utils/api";
-import { SortOrder } from "~/utils/helpers";
+import { type SortOrder } from "~/utils/helpers";
 
 const PAGE_SIZE = 5;
 
@@ -26,8 +24,10 @@ export default function Titles() {
   console.log('router.query.page', router.query.page);
 
   const currentPage = router.query.page ? parseInt(router.query.page as string) : 1;
-  const currentSortBy = router.query.sortBy ? router.query.sortBy as "titleNumber" | "tenure" : "titleNumber";
-  const currentSortOrder = router.query.sortOrder ? router.query.sortOrder as SortOrder : "asc";
+  const defaultSortBy = "titleNumber";
+  const currentSortBy = router.query.sortBy ? router.query.sortBy as "titleNumber" | "tenure" : defaultSortBy;
+  const defaultSortOrder = "asc";
+  const currentSortOrder = router.query.sortOrder ? router.query.sortOrder as SortOrder : defaultSortOrder;
 
   const { data, isLoading } = api.title.getAll.useQuery({ page: currentPage, pageSize: PAGE_SIZE, sort: { by: currentSortBy, order: currentSortOrder } });
 
@@ -36,16 +36,12 @@ export default function Titles() {
       title: "Title Number",
       key: "titleNumber",
       sortable: true,
-      sortActive: currentSortBy === "titleNumber",
-      sortOrder: currentSortOrder,
       width: "55%",
     },
     {
       title: "Class of Title",
       key: "tenure",
       sortable: true,
-      sortActive: currentSortBy === "tenure",
-      sortOrder: currentSortOrder,
       width: "45%",
     },
   ];
@@ -58,9 +54,8 @@ export default function Titles() {
     await router.push(getPageUrl(newPage, currentSortBy, currentSortOrder));
   }
 
-  const onSort = async (column: TableColumn<Title>) => {
-    const newSortOrder = currentSortBy === column.key && currentSortOrder === "asc" ? "desc" : "asc";
-    await router.push(getPageUrl(1, column.key, newSortOrder));
+  const onSort = async (key: keyof Title, sortOrder: SortOrder) => {
+    await router.push(getPageUrl(1, key, sortOrder));
   }
 
   return (
@@ -70,6 +65,10 @@ export default function Titles() {
         rows={data}
         onRowClick={(row) => router.push(`/titles/${row.titleNumber}`)}
         onSort={onSort}
+        currentSortBy={currentSortBy}
+        currentSortOrder={currentSortOrder}
+        defaultSortBy={defaultSortBy}
+        defaultSortOrder={defaultSortOrder}
         loading={isLoading}
       />
       <div className="flex justify-between items-center mt-3">
