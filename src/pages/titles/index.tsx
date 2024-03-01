@@ -75,13 +75,15 @@ export default function Titles() {
           disabled={currentPage === 1}
           onClick={() => changePage(currentPage - 1)}
           className="pl-[4px]"
+          data-testid="previous-page-btn"
         ><ChevronLeftIcon className="h-6 w-6 mr-1 fill-white" aria-hidden="true" />Previous page
         </FullButton>
-        <span>Page {currentPage}</span>
+        <span data-testid="page-index">Page {currentPage}</span>
         <FullButton
           variant="primary"
           onClick={() => changePage(currentPage + 1)}
           className="pr-[4px]"
+          data-testid="next-page-btn"
         >
           Next page
           <ChevronRightIcon className="h-6 w-6 ml-1 fill-white" aria-hidden="true" />
