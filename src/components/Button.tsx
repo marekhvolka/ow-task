@@ -8,6 +8,7 @@ interface Props {
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   className?: string;
+  "data-testid"?: string;
 }
 
 export const FullButton = (props: Props) => {
@@ -26,6 +27,7 @@ export const FullButton = (props: Props) => {
         props.disabled ? "opacity-50 cursor-not-allowed" : "",
         props.className,
       )}
+      data-testid={props["data-testid"]}
     >{props.children}
     </button>
   )

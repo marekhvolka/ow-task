@@ -38,7 +38,7 @@ export function TableLayout<T>(props: Props<T>) {
 
   return (
     <div className="w-full">
-      <table className="w-full">
+      <table className="w-full" data-testid="table">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             {props.columns.map((column, index) => (
@@ -55,6 +55,7 @@ export function TableLayout<T>(props: Props<T>) {
                 style={{
                   width: column.width,
                 }}
+                data-testid={`table-column-${index + 1}`}
               >
                 <div className={cn(
                   "flex items-center",
@@ -68,6 +69,7 @@ export function TableLayout<T>(props: Props<T>) {
                       className={cn(
                         "w-[20px] h-[20px] ml-5",
                       )}
+                      data-testid={`sort-icon-${props.currentSortOrder}`}
                     />
                   )}
                 </div>
@@ -83,7 +85,7 @@ export function TableLayout<T>(props: Props<T>) {
                 "bg-white border-b hover:bg-gray-50 cursor-pointer",
               )}
               onClick={() => props.onRowClick?.(row)}
-              data-testid={`table-row-${index}`}
+              data-testid={`table-row-${index + 1}`}
             >
               {props.columns.map((column, index) => (
                 <td
