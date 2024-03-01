@@ -7,6 +7,10 @@ export class TitlesTableHelper {
     return '[data-testid="table-column-2"]';
   }
 
+  static getSortIcon() {
+    return '[data-testid^="sort-icon"]';
+  }
+
   static getSortIconAsc() {
     return '[data-testid="sort-icon-asc"]';
   }

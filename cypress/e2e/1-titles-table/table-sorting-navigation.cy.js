@@ -52,12 +52,23 @@ describe('titles table', () => {
     cy.get(TitlesTableHelper.getPreviousPageButton()).should('be.disabled')
   })
 
+  it('navigate to a specific page with specific sorting', () => {
+
+    cy.visit('http://localhost:3000/titles?page=3&sortBy=tenure&sortOrder=desc')
+    
+    cy.get(TitlesTableHelper.getPageIndex()).contains('Page 3')
+
+    cy.get(`${TitlesTableHelper.getFirstColumnHeader()} ${TitlesTableHelper.getSortIcon()}`).should('not.exist')
+    cy.get(`${TitlesTableHelper.getSecondColumnHeader()} ${TitlesTableHelper.getSortIconDesc()}`).should('be.visible')
+    
+  })
+
   it('reset to page 1, when sorting has changed', () => {
     cy.get(TitlesTableHelper.getNextPageButton()).click()
     
     cy.get(TitlesTableHelper.getPageIndex()).contains('Page 2')
     cy.location('href').should('include', 'page=2')
-    cy.get(TitlesTableHelper.getFirstColumnHeader()).get(TitlesTableHelper.getSortIconAsc()).should('be.visible')
+    cy.get(`${TitlesTableHelper.getFirstColumnHeader()} ${TitlesTableHelper.getSortIconAsc()}`).should('be.visible')
 
     cy.get(TitlesTableHelper.getFirstColumnHeader()).click()
 
@@ -77,12 +88,12 @@ describe('titles table', () => {
           expect(values).to.deep.equal(sorted)
         })
 
-    cy.get(TitlesTableHelper.getFirstColumnHeader()).get(TitlesTableHelper.getSortIconAsc()).should('be.visible')
+    cy.get(`${TitlesTableHelper.getFirstColumnHeader()} ${TitlesTableHelper.getSortIconAsc()}`).should('be.visible')
     cy.get(TitlesTableHelper.getFirstColumnHeader()).click()
     
     cy.location('href').should('include', 'sortBy=titleNumber')
     cy.location('href').should('include', 'sortOrder=desc')
-    cy.get(TitlesTableHelper.getFirstColumnHeader()).get(TitlesTableHelper.getSortIconDesc()).should('be.visible')
+    cy.get(`${TitlesTableHelper.getFirstColumnHeader()} ${TitlesTableHelper.getSortIconDesc()}`).should('be.visible')
 
     cy.get(TitlesTableHelper.getFirstColumnValues())
       .then(toStrings)
@@ -94,7 +105,7 @@ describe('titles table', () => {
         })
 
     cy.get(TitlesTableHelper.getSecondColumnHeader()).click()
-    cy.get(TitlesTableHelper.getSecondColumnHeader()).get(TitlesTableHelper.getSortIconAsc()).should('be.visible')
+    cy.get(`${TitlesTableHelper.getSecondColumnHeader()} ${TitlesTableHelper.getSortIconAsc()}`).should('be.visible')
 
     cy.location('href').should('include', 'sortBy=tenure')
     cy.location('href').should('include', 'sortOrder=asc')
